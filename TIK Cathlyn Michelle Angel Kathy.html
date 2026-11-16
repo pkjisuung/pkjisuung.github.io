@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Inequality - Kesenjangan Pendidikan di Papua, Indonesia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--mist:#eef3ee;--fog:#dfe9e1;--moss:#3f6b52;--forest:#1f3a2e;--river:#4f8f8b;--sand:#f4efe0;--bark:#8a6f4e;--ink:#223229;--soft:#566a5e;--serif:'Fraunces',Georgia,serif;--sans:'Nunito Sans',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--mist);color:var(--ink);line-height:1.7;font-size:17px}
+button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:3px solid var(--river);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--serif);color:var(--forest);line-height:1.2}
+h2{font-size:clamp(1.7rem,3.4vw,2.3rem);margin-bottom:12px}h3{font-size:1.2rem;margin-bottom:8px}
+section{padding:70px 0}.lead{color:var(--soft);max-width:62ch;margin-bottom:28px}
+.bg-fog{background:var(--fog)}.bg-sand{background:var(--sand)}
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--moss),var(--river));z-index:50}
+header{position:relative;background:linear-gradient(180deg,#bcd9d2 0%,#e3eee4 60%,var(--mist) 100%);overflow:hidden}
+.hero{padding:80px 0 250px;position:relative;z-index:3}
+.hero h1{font-size:clamp(2.2rem,6vw,4rem);max-width:16ch}
+.hero .sub{margin-top:16px;max-width:52ch;color:var(--moss);font-size:1.1rem}
+.sun{position:absolute;right:10%;top:50px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,#fff6d8 0%,#f3e3a8 55%,transparent 72%);z-index:1;animation:glow 6s ease-in-out infinite alternate}
+@keyframes glow{to{transform:scale(1.15);opacity:.8}}
+.layer{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:240px;z-index:2;will-change:transform}
+.leaf{position:absolute;z-index:2;font-size:22px;opacity:.55;animation:fall linear infinite}
+@keyframes fall{from{transform:translate(0,-40px) rotate(0)}to{transform:translate(60px,420px) rotate(300deg)}}
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.stat{background:rgba(255,255,255,.7);backdrop-filter:blur(6px);border-radius:16px;padding:12px 20px}
+.stat strong{display:block;font-family:var(--serif);font-size:2rem;color:var(--forest);line-height:1.1}.stat span{font-size:.88rem;color:var(--soft)}
+.team{background:var(--forest);color:var(--mist);padding:32px 0}
+.team h2{color:#fff;font-size:1.3rem;margin-bottom:2px}.team .cls{color:#b9d0c3;margin-bottom:16px}
+.team ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.team li{border-left:3px solid var(--river);padding-left:12px;line-height:1.4}.team li span{display:block;color:#b9d0c3;font-size:.9rem}
+nav{position:sticky;top:0;z-index:20;background:rgba(238,243,238,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--fog)}
+nav .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px}
+nav a{white-space:nowrap;text-decoration:none;color:var(--forest);font-weight:600;font-size:.92rem;padding:6px 14px;border-radius:99px}
+nav a:hover,nav a.on{background:var(--moss);color:#fff}
+/* masalah */
+.q{display:grid;gap:12px}
+.q button{text-align:left;background:#fff;border:1px solid var(--fog);border-radius:18px 18px 18px 4px;padding:20px 24px;display:flex;gap:16px;transition:.2s}
+.q button:hover{border-color:var(--river);transform:translateX(4px)}
+.q b{font-family:var(--serif);font-size:1.6rem;color:var(--river)}
+.q .hint{display:none;margin-top:8px;font-size:.92rem;color:var(--moss);font-weight:600}.q button.open .hint{display:block}
+/* tabs */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tab{background:#fff;border:2px solid transparent;border-radius:99px;padding:8px 18px;font-weight:700;color:var(--forest)}
+.tab[aria-selected=true]{background:var(--moss);color:#fff}
+.tab.ghost{background:transparent;border-color:var(--moss)}
+.panel{background:#fff;border-radius:22px;padding:28px}
+.row{margin-bottom:16px;cursor:pointer}.row .lab{display:flex;justify-content:space-between;font-weight:700;margin-bottom:5px}
+.track{height:20px;background:var(--fog);border-radius:99px;overflow:hidden}
+.fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--moss),var(--river));transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.fill.warm{background:linear-gradient(90deg,var(--bark),#c0a272)}
+.row:hover .track{box-shadow:0 0 0 3px var(--river)}
+.note{margin-top:14px;font-size:.9rem;color:var(--soft)}
+.tip{min-height:3em;margin-top:12px;padding:12px 16px;background:var(--mist);border-radius:12px;font-weight:600}
+/* evidence */
+.ev{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.flip{perspective:900px;height:300px;border:0;background:none;text-align:left}
+.flip i{position:absolute;inset:0;transition:transform .6s;transform-style:preserve-3d;font-style:normal;display:block}
+.flip{position:relative}.flip.open i{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:20px;padding:22px;backface-visibility:hidden;overflow:auto}
+.front{background:var(--moss);color:#fff;display:flex;flex-direction:column;justify-content:space-between}
+.front small{opacity:.8;font-weight:700}.front h3{color:#fff;font-size:1.3rem}.front em{font-style:normal;font-size:.85rem;opacity:.85}
+.flip:nth-child(2) .front{background:var(--river)}.flip:nth-child(3) .front{background:var(--bark)}.flip:nth-child(4) .front{background:#5f7f62}
+.back{background:#fff;transform:rotateY(180deg);font-size:.93rem;line-height:1.55;border:2px solid var(--fog)}
+.back b{font-family:var(--serif);font-size:1.5rem;color:var(--forest)}
+/* flow */
+.flow{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.node{border-radius:16px;padding:16px 22px;border:2px solid transparent;text-align:center;background:#e8efe9;width:100%}
+.node b{display:block;font-family:var(--serif);font-size:1.12rem}.node span{font-size:.9rem;color:var(--soft)}
+.node:hover,.node.sel{border-color:var(--moss);background:#fff}
+.n1{background:#dde9ee}.n2{background:#f1e2d6}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}.pair .node{text-align:left}
+.arrow{text-align:center;color:var(--moss);font-size:1.5rem;line-height:1}
+.detail{max-width:760px;margin:18px auto 0;background:#fff;border-left:5px solid var(--river);border-radius:14px;padding:16px 20px;min-height:4.5em}
+/* impact */
+.imp ul{list-style:none}.imp li{padding:11px 0 11px 22px;position:relative;border-top:1px solid var(--fog)}
+.imp li::before{content:"";position:absolute;left:0;top:20px;width:9px;height:9px;border-radius:50% 0 50% 0;background:var(--moss)}
+.imp li b{color:var(--forest)}
+/* solusi */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:18px}
+.card{background:#fff;border-radius:20px;padding:24px}.card .d{margin-bottom:14px}
+.tgl{display:flex;gap:6px;margin-bottom:10px}
+.tgl button{flex:1;border:2px solid var(--fog);background:var(--mist);border-radius:12px;padding:6px;font-weight:700}
+.tgl button.on.pro{background:#d8ebd8;border-color:var(--moss)}.tgl button.on.con{background:#f1e2d2;border-color:var(--bark)}
+.res{padding:12px 14px;border-radius:12px;font-size:.96rem;min-height:5.5em}
+.res.pro{background:#e4efe4}.res.con{background:#f3e8dc}
+.grp{margin:28px 0 14px}
+/* quiz */
+.quiz{max-width:720px;margin:0 auto}
+.qq{background:#fff;border-radius:20px;padding:24px;margin-bottom:16px}
+.opts{display:grid;gap:8px;margin-top:12px}
+.opts button{text-align:left;padding:10px 16px;border-radius:12px;border:2px solid var(--fog);background:var(--mist)}
+.opts button:hover:not(:disabled){border-color:var(--river)}
+.opts .ok{background:#d8ebd8;border-color:var(--moss)}.opts .no{background:#f3d9d3;border-color:#b5604f}
+.fb{margin-top:10px;font-weight:600;color:var(--moss)}
+.score{text-align:center;font-family:var(--serif);font-size:1.4rem;color:var(--forest);min-height:2em}
+.concl{background:var(--forest);color:var(--mist)}.concl h2{color:#fff}.concl .lead{color:#b9d0c3}
+.concl ul{list-style:none;display:grid;gap:14px;max-width:780px}.concl li{border-left:3px solid var(--river);padding-left:16px}
+footer{padding:32px 0;font-size:.9rem;color:var(--soft);text-align:center}
+.rv{opacity:0;transform:translateY(22px);transition:.7s}.rv.in{opacity:1;transform:none}
+@media(max-width:600px){.cards{grid-template-columns:1fr}.pair{grid-template-columns:1fr}.hero{padding-bottom:180px}.sun{width:90px;height:90px}.flip{height:340px}section{padding:50px 0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style></head><body>
+<div id="bar"></div>
+<header>
+<div class="sun"></div>
+<span class="leaf" style="left:12%;animation-duration:14s">🍃</span><span class="leaf" style="left:38%;animation-duration:18s;animation-delay:-6s">🍃</span><span class="leaf" style="left:62%;animation-duration:16s;animation-delay:-3s">🍃</span><span class="leaf" style="left:84%;animation-duration:20s;animation-delay:-10s">🍃</span>
+<div class="wrap hero">
+<h1>Digital Inequality - Kesenjangan Pendidikan di Papua, Indonesia</h1>
+<p class="sub">Saat sebagian anak belajar dengan internet cepat, ribuan sekolah di Papua belum terhubung sama sekali. Jelajahi datanya, buka buktinya, lalu uji pemahamanmu.</p>
+<div class="stats">
+<div class="stat"><strong data-n="2803" data-f="id">0</strong><span>sekolah belum punya internet</span></div>
+<div class="stat"><strong><span data-n="50">0</span>% vs <span data-n="5">0</span>%</strong><span>belum pernah sekolah: desa vs kota</span></div>
+<div class="stat"><strong data-n="32.97" data-d="2">0</strong><span>% penduduk miskin di Papua Pegunungan</span></div>
+</div></div>
+<svg class="layer" data-s=".12" viewBox="0 0 1440 240" preserveAspectRatio="none"><path d="M0 140C180 70 300 60 470 110S760 60 940 70 1250 130 1440 90V240H0Z" fill="#a9c9b5" opacity=".7"/></svg>
+<svg class="layer" data-s=".06" viewBox="0 0 1440 240" preserveAspectRatio="none"><path d="M0 175C150 125 330 115 500 155S820 115 1010 125 1310 175 1440 145V240H0Z" fill="#6f9f84" opacity=".85"/></svg>
+<svg class="layer" viewBox="0 0 1440 240" preserveAspectRatio="none"><path d="M0 210C200 175 360 180 560 200S960 175 1140 185 1380 210 1440 205V240H0Z" fill="#3f6b52"/></svg>
+</header>
+<div class="team"><div class="wrap"><h2>Anggota Kelompok</h2><p class="cls">Kelas TIK XII 3</p>
+<ul><li>Delima Angelica Budialin<span>No. absen 07</span></li><li>Kathy Ivana<span>No. absen 18</span></li><li>Cathlyn Pricilla Weraldy<span>No. absen 05</span></li><li>Michelle Callista Budiarto Liem<span>No. absen 23</span></li></ul></div></div>
+<nav><div class="wrap" id="nav"><a href="#masalah">Masalah</a><a href="#data">Data</a><a href="#bukti">Bukti</a><a href="#pola">Pola</a><a href="#dampak">Dampak</a><a href="#solusi">Solusi</a><a href="#kuis">Kuis</a><a href="#kesimpulan">Kesimpulan</a></div></nav>
+<main>
+<section id="masalah"><div class="wrap rv"><h2>Rumusan Masalah</h2><p class="lead">Klik tiap pertanyaan untuk melihat bagian yang menjawabnya.</p>
+<div class="q">
+<button><b>1</b><div>Bagaimana kondisi riil dan ketersediaan fasilitas dasar (bangunan layak, listrik, sanitasi, dan internet), dan apa dampak keterbatasan sarana prasarana sekolah terhadap efektivitas proses belajar mengajar anak usia sekolah di Tanah Papua?<div class="hint">Jawabannya ada di bagian Bukti 1–4 dan Analisis Dampak.</div></div></button>
+<button><b>2</b><div>Mengapa terjadi ketimpangan distribusi guru berkualitas yang ekstrem antara wilayah perkotaan dan wilayah pedalaman/3T di Papua?<div class="hint">Lihat diagram Pola Masalah (Ketimpangan guru) dan Bukti 4.</div></div></button>
+<button><b>3</b><div>Bagaimana tingkat kemiskinan struktural memengaruhi tingginya angka putus sekolah pada anak remaja (usia 16–18 tahun)?<div class="hint">Lihat grafik kemiskinan di bagian Data dan diagram Pola Masalah.</div></div></button>
+</div></div></section>
+
+<section id="data" class="bg-fog"><div class="wrap rv"><h2>Data</h2><p class="lead">Pilih topik, urutkan, lalu klik batang untuk melihat catatannya.</p>
+<div class="tabs" role="tablist"><button class="tab" role="tab" aria-selected="true" data-k="net">Akses internet</button><button class="tab" role="tab" aria-selected="false" data-k="mis">Kemiskinan</button><button class="tab ghost" id="sort">Urutkan dari tertinggi</button></div>
+<div class="panel"><h3 id="dt"></h3><div id="bars"></div><div class="tip" id="tip">Klik salah satu batang.</div><p class="note" id="dn"></p></div></div></section>
+
+<section id="bukti"><div class="wrap rv"><h2>Bukti: Fasilitas Dasar Sekolah dan Dampaknya</h2><p class="lead">Klik kartu untuk membaliknya dan membaca buktinya.</p>
+<div class="ev">
+<button class="flip"><i><span class="face front"><small>Bukti 1</small><h3>Kesenjangan infrastruktur digital</h3><em>Klik untuk membuka</em></span><span class="face back"><b>2.803</b> sekolah belum memiliki akses internet. Laporan Bank Dunia <i>Digital Foundations for Growth</i> (data 2024–2025) menunjukkan ketersediaan internet untuk pendidikan masih menjadi persoalan infrastruktur yang perlu ditangani.</span></i></button>
+<button class="flip"><i><span class="face front"><small>Bukti 2</small><h3>Listrik dan internet di daerah 3T</h3><em>Klik untuk membuka</em></span><span class="face back">Laporan Kemendikdasmen (November 2025): kepala TK di Teluk Bintuni menyebut pasokan listrik tidak stabil. Listrik diesel hanya tersedia sore sampai malam, sehingga perangkat digital tidak bisa dipakai maksimal di siang hari.</span></i></button>
+<button class="flip"><i><span class="face front"><small>Bukti 3</small><h3>Ketimpangan desa dan kota</h3><em>Klik untuk membuka</em></span><span class="face back"><b>±50% vs ±5%</b> UNICEF: hampir 50% anak di atas lima tahun di perdesaan Papua belum pernah bersekolah, dibanding sekitar 5% di perkotaan. Kesenjangan juga terkait lokasi geografis, kekayaan rumah tangga, dan kelompok masyarakat adat.</span></i></button>
+<button class="flip"><i><span class="face front"><small>Bukti 4</small><h3>Hambatan pembelajaran digital</h3><em>Klik untuk membuka</em></span><span class="face back">Kajian UNICEF: keterbatasan sinyal, kepemilikan perangkat, dan biaya internet menghambat anak-anak di Papua. Guru di wilayah sulit jaringan bahkan harus mengunjungi siswa langsung untuk mendukung pembelajaran.</span></i></button>
+</div></div></section>
+
+<section id="pola" class="bg-sand"><div class="wrap rv"><h2>Pola Hubungan Permasalahan</h2><p class="lead">Klik kotak untuk melihat penjelasannya.</p>
+<div class="flow" id="flow">
+<button class="node n1" data-t="Kemiskinan struktural menjadi akar: pendapatan terbatas, layanan dasar sulit, dan akses geografis berat. Papua Pegunungan (32,97%) dan Papua Tengah (29,76%) mencatat angka tertinggi."><b>Kemiskinan struktural</b><span>Keterbatasan pendapatan, layanan dasar, dan akses geografis</span></button>
+<div class="arrow">↓</div>
+<div class="pair">
+<button class="node" data-t="2.803 sekolah belum punya internet, dan listrik di daerah seperti Teluk Bintuni tidak stabil (Bukti 1 dan 2)."><b>Infrastruktur terbatas</b><span>Bangunan, listrik, internet, dan sanitasi</span></button>
+<button class="node" data-t="Stunting, penyakit, dan hambatan perkembangan membuat anak kurang siap belajar."><b>Kesehatan dan gizi</b><span>Stunting, penyakit, dan hambatan perkembangan</span></button>
+<button class="node" data-t="Guru kurang, tidak merata, dan kualitasnya timpang. Di daerah sulit jaringan, guru harus mengunjungi siswa langsung (Bukti 4)."><b>Ketimpangan guru</b><span>Kekurangan guru, distribusi, dan kualitas</span></button>
+<button class="node" data-t="Biaya sekolah dan kebutuhan ekonomi keluarga menekan anak, termasuk remaja 16–18 tahun, untuk berhenti sekolah."><b>Beban keluarga</b><span>Biaya sekolah dan kebutuhan ekonomi</span></button>
+</div><div class="arrow">↓</div>
+<button class="node n2" data-t="Kualitas belajar, kesiapan belajar, kehadiran, dan akses sekolah terganggu sehingga proses pendidikan tidak berlanjut."><b>Hambatan proses dan keberlanjutan pendidikan</b><span>Kualitas pembelajaran, kesiapan belajar, kehadiran, dan akses sekolah</span></button>
+<div class="arrow">↓</div>
+<button class="node n2" data-t="Hasilnya: rendahnya partisipasi pendidikan menengah dan ketimpangan kualitas SDM antarwilayah."><b>Kesenjangan hasil pendidikan</b><span>Rendahnya partisipasi pendidikan menengah dan ketimpangan kualitas SDM</span></button>
+</div><div class="detail" id="fd">Klik salah satu kotak di atas.</div></div></section>
+
+<section id="dampak"><div class="wrap rv"><h2>Analisis Dampak</h2><p class="lead">Pilih sisi yang ingin kamu lihat.</p>
+<div class="tabs" id="itabs"></div><div class="panel imp" id="ip"></div></div></section>
+
+<section id="solusi" class="bg-fog"><div class="wrap rv"><h2>Evaluasi Solusi</h2><p class="lead">Di setiap kartu, bandingkan kelebihan dan kelemahannya.</p>
+<h3 class="grp">1. Solusi dari pemerintah</h3><div class="cards" id="s1"></div>
+<h3 class="grp">2. Solusi dari masyarakat</h3><div class="cards" id="s2"></div></div></section>
+
+<section id="kuis"><div class="wrap rv"><h2>Uji Pemahamanmu</h2><p class="lead">Tiga pertanyaan singkat dari data di atas.</p><div class="quiz" id="quiz"></div><p class="score" id="sc"></p></div></section>
+
+<section id="kesimpulan" class="concl"><div class="wrap rv"><h2>Kesimpulan Berbasis Bukti</h2><p class="lead">Ringkasan dari data dan bukti di atas.</p>
+<ul><li>Akses internet berkisar dari 28,71% di Papua Barat sampai 62,24% di Papua Tengah, dan 2.803 sekolah di kawasan Papua belum terhubung internet.</li>
+<li>Listrik yang tidak stabil di daerah 3T membuat perangkat digital tidak bisa dipakai maksimal untuk belajar.</li>
+<li>Kemiskinan tertinggi ada di Papua Pegunungan (32,97%) dan Papua Tengah (29,76%). Di perdesaan, hampir 50% anak di atas lima tahun belum pernah bersekolah, dibanding sekitar 5% di perkotaan.</li>
+<li>Solusi pemerintah dan masyarakat sudah membantu, tetapi masih terbentur sarana, jangkauan, dan keberlanjutan. Infrastruktur dasar, pemerataan guru, dan penanganan kemiskinan struktural perlu dikerjakan bersama.</li></ul></div></section>
+</main>
+<footer><div class="wrap"><p><strong>Sumber:</strong> Statistik Telekomunikasi Indonesia 2024 (BPS, 2025); Bank Dunia, <i>Digital Foundations for Growth</i>; Kemendikdasmen (November 2025); UNICEF.</p><p style="margin-top:8px">Delima Angelica Budialin, Kathy Ivana, Cathlyn Pricilla Weraldy, Michelle Callista Budiarto Liem · TIK XII 3</p></div></footer>
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const fmt=(v,d=0)=>v.toLocaleString('id-ID',{minimumFractionDigits:d,maximumFractionDigits:d});
+// progress + parallax + nav highlight
+addEventListener('scroll',()=>{const h=document.documentElement;$('#bar').style.width=scrollY/(h.scrollHeight-innerHeight)*100+'%';
+$$('.layer[data-s]').forEach(l=>l.style.transform=`translateY(${-scrollY*l.dataset.s}px)`);
+let cur='';$$('main section').forEach(s=>{if(s.getBoundingClientRect().top<innerHeight*.4)cur=s.id});
+$$('#nav a').forEach(a=>a.classList.toggle('on',a.hash==='#'+cur))});
+// reveal + counters
+const cnt=el=>{const t=+el.dataset.n,d=+el.dataset.d||0,s=performance.now();(function f(n){const p=Math.min((n-s)/1400,1);el.textContent=fmt(t*(1-Math.pow(1-p,3)),d);if(p<1)requestAnimationFrame(f)})(s)};
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
+$$('.rv').forEach(e=>io.observe(e));
+$$('[data-n]').forEach(cnt);
+// masalah
+$$('.q button').forEach(b=>b.onclick=()=>b.classList.toggle('open'));
+// data
+const D={net:{t:'Persentase penduduk yang mengakses internet',max:100,cls:'',src:'Sumber: Statistik Telekomunikasi Indonesia 2024, BPS (2025), dikutip dalam publikasi pemerintah.',
+ r:[['Papua Barat',28.71,'Terendah di antara empat provinsi ini: kurang dari 3 dari 10 penduduk mengakses internet.'],['Papua',48.44,'Kurang dari separuh penduduk mengakses internet.'],['Papua Tengah',62.24,'Tertinggi di antara empat provinsi ini.'],['Papua Pegunungan',54,84,'']]},
+ mis:{t:'Persentase penduduk miskin',max:40,cls:'warm',src:'Panjang batang dihitung dari skala 0–40%.',
+ r:[['Papua Barat',21.66,''],['Papua Barat Daya',18.13,''],['Papua',17.26,'Terendah di antara enam provinsi ini.'],['Papua Selatan',17.44,''],['Papua Tengah',29.76,'Hampir 3 dari 10 penduduk hidup miskin.'],['Papua Pegunungan',32.97,'Tertinggi: sekitar sepertiga penduduk hidup miskin.']]}};
+D.net.r[3]=['Papua Pegunungan',54.84,'Lebih tinggi dari Papua, tetapi masih di bawah Papua Tengah.'];
+let k='net',srt=false;
+function draw(){const o=D[k];let r=[...o.r];if(srt)r.sort((a,b)=>b[1]-a[1]);$('#dt').textContent=o.t;$('#dn').textContent=o.src;$('#tip').textContent='Klik salah satu batang.';
+$('#bars').innerHTML=r.map((x,i)=>`<div class="row" tabindex="0" data-i="${i}"><div class="lab"><span>${x[0]}</span><span>${fmt(x[1],2)}%</span></div><div class="track"><div class="fill ${o.cls}" data-w="${x[1]/o.max*100}"></div></div></div>`).join('');
+setTimeout(()=>$$('.fill').forEach(f=>f.style.width=f.dataset.w+'%'),30);
+$$('.row').forEach(e=>{const go=()=>{$('#tip').textContent=r[e.dataset.i][0]+': '+fmt(r[e.dataset.i][1],2)+'%. '+r[e.dataset.i][2]};e.onclick=go;e.onkeydown=ev=>{if(ev.key==='Enter')go()}})}
+$$('.tab[data-k]').forEach(b=>b.onclick=()=>{k=b.dataset.k;$$('.tab[data-k]').forEach(x=>x.setAttribute('aria-selected',x===b));draw()});
+$('#sort').onclick=e=>{srt=!srt;e.target.textContent=srt?'Kembali ke urutan asli':'Urutkan dari tertinggi';draw()};draw();
+// evidence
+$$('.flip').forEach(b=>b.onclick=()=>b.classList.toggle('open'));
+// flow
+$$('#flow .node').forEach(n=>n.onclick=()=>{$$('#flow .node').forEach(x=>x.classList.remove('sel'));n.classList.add('sel');$('#fd').textContent=n.dataset.t});
+// dampak
+const I=[['Akademik & learning loss',[['Penurunan kemampuan belajar.','Literasi dasar (membaca, menulis) dan numerasi turun drastis, terutama pada anak keluarga berpenghasilan rendah dan daerah terpencil tanpa internet atau perangkat digital selama PJJ.'],['Hambatan kurikulum modern.','Kurikulum Merdeka menuntut media digital, alat peraga, dan pembelajaran aktif, sulit diterapkan di sekolah tanpa listrik, perpustakaan, laboratorium, atau internet.'],['Proses belajar tidak optimal.','Sarana terbatas dan minim pendampingan guru membuat siswa sering hanya diberi tugas tanpa penjelasan konsep dasar.']]],
+['Psikologis & motivasi',[['Motivasi dan kepercayaan diri menurun.','Kelas rusak, gelap, sempit, atau menumpang di rumah warga memberi kesan negatif, menghambat fokus, dan menurunkan pandangan anak tentang masa depannya.'],['Stres sosial.','Anak dari keluarga kurang mampu merasa terisolasi dari proses belajar karena keterbatasan sarana, misalnya tidak ada smartphone bersama di rumah.']]],
+['Sosial & antarwilayah',[['Ketimpangan kesempatan masa depan.','Anak di wilayah terpencil punya peluang jauh lebih kecil bersaing setara saat melanjutkan sekolah atau masuk dunia kerja dibanding anak di perkotaan seperti Jawa.'],['Mobilitas sosial terhambat.','Pendidikan yang seharusnya memeratakan kesempatan justru berisiko melanggengkan ketidakadilan antarwilayah.']]],
+['Ekonomi & SDM',[['Produktivitas stagnan.','Rendahnya kompetensi lulusan menurunkan kualitas SDM daerah, sehingga sulit keluar dari jebakan kemiskinan struktural.'],['IPM rendah.','Ketimpangan fasilitas dan akses pendidikan secara kumulatif menahan laju IPM daerah tertinggal dibanding wilayah Indonesia lainnya.']]]];
+I.forEach((x,i)=>{const b=document.createElement('button');b.className='tab';b.textContent=x[0];b.setAttribute('aria-selected',i==0);b.onclick=()=>{$$('#itabs .tab').forEach(t=>t.setAttribute('aria-selected',t===b));show(i)};$('#itabs').append(b)});
+function show(i){$('#ip').innerHTML='<ul>'+I[i][1].map(l=>`<li><b>${l[0]}</b> ${l[1]}</li>`).join('')+'</ul>'}show(0);
+// solusi
+const S=[['s1','Kurikulum Merdeka','Memberi fleksibilitas kepada sekolah untuk menyesuaikan pembelajaran dengan kemampuan dan kebutuhan peserta didik.','Guru dapat menyesuaikan materi dengan tingkat kemampuan siswa, termasuk yang tertinggal dalam literasi dan numerasi.','Butuh kesiapan guru, buku, alat peraga, dan fasilitas pendukung. Sekolah pedalaman Papua dengan sarana terbatas menghadapi kesulitan lebih besar.'],
+['s1','Program Kampus Mengajar','Melibatkan mahasiswa membantu sekolah, khususnya meningkatkan literasi dan numerasi serta mendukung pemanfaatan teknologi pembelajaran.','Membantu sekolah yang kekurangan pendamping belajar dan menghadirkan metode belajar lebih bervariasi.','Penempatan tidak selalu menjangkau semua sekolah terpencil, dan program berbatas waktu tidak otomatis menjamin pendampingan berkelanjutan.'],
+['s2','Kelompok belajar','Masyarakat, organisasi sosial, komunitas pendidikan, dan relawan membentuk kelompok belajar untuk membantu anak memahami pelajaran dasar.','Anak mendapat pendampingan langsung meskipun sekolah formal tidak berjalan optimal.','Sangat bergantung pada ketersediaan relawan, buku, dan sumber pendanaan.'],
+['s2','Peran orang tua','Orang tua membantu anak membaca, berhitung, mengerjakan tugas, dan membangun kebiasaan belajar di rumah.','Meningkatkan keterlibatan keluarga dalam pendidikan anak.','Tidak semua orang tua punya waktu, kemampuan literasi, atau pendidikan yang cukup untuk mendampingi.']];
+S.forEach(s=>{const c=document.createElement('div');c.className='card';c.innerHTML=`<h3>${s[1]}</h3><p class="d">${s[2]}</p><div class="tgl"><button class="pro on">Kelebihan</button><button class="con">Kelemahan</button></div><div class="res pro">${s[3]}</div>`;
+const [p,q]=$$('button',c),r=$('.res',c);p.onclick=()=>{p.classList.add('on');q.classList.remove('on');r.className='res pro';r.textContent=s[3]};q.onclick=()=>{q.classList.add('on');p.classList.remove('on');r.className='res con';r.textContent=s[4]};$('#'+s[0]).append(c)});
+// kuis
+const Q=[['Provinsi mana yang memiliki persentase penduduk miskin tertinggi?',['Papua Barat','Papua Tengah','Papua Pegunungan'],2,'Papua Pegunungan: 32,97%.'],
+['Berapa sekolah di kawasan Papua yang belum memiliki akses internet (data Bank Dunia)?',['2.803','280','28.030'],0,'Laporan Bank Dunia mencatat 2.803 sekolah.'],
+['Hampir berapa persen anak di perdesaan Papua (di atas 5 tahun) yang belum pernah bersekolah?',['5%','50%','25%'],1,'Menurut UNICEF, hampir 50% di desa, dibanding sekitar 5% di kota.']];
+let sc=0,dn=0;Q.forEach(q=>{const d=document.createElement('div');d.className='qq';d.innerHTML=`<b>${q[0]}</b><div class="opts"></div><p class="fb"></p>`;
+q[1].forEach((o,i)=>{const b=document.createElement('button');b.textContent=o;b.onclick=()=>{$$('button',d).forEach(x=>x.disabled=true);const ok=i==q[2];b.classList.add(ok?'ok':'no');if(!ok)$$('button',d)[q[2]].classList.add('ok');$('.fb',d).textContent=(ok?'Benar! ':'Belum tepat. ')+q[3];if(ok)sc++;if(++dn==Q.length)$('#sc').textContent='Skormu: '+sc+' dari '+Q.length+(sc==3?'. Sempurna!':'. Coba baca lagi bagian Data dan Bukti.')};$('.opts',d).append(b)});$('#quiz').append(d)});
+</script></body></html>
